@@ -1,0 +1,12 @@
+name: playwright
+channels:
+ - conda-forge
+ - bioconda
+dependencies:
+ - ffmpeg
+ - python
+ - pip
+ - pip:
+   - Pillow
+   - playwright
+   - python-ffmpeg
