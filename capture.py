@@ -24,7 +24,7 @@ def image_capture(url, width, height, fn="image.png"):
             img = image_crop(img)
             img.save(fn)
 
-def video_capture(url, width, height, duration=10, fps=60, padding=5, fn="video.mp4"):
+def video_capture(url, width, height, duration=10, fps=60, speed=1, padding=5, fn="video.mp4"):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         context = browser.new_context(
@@ -50,7 +50,7 @@ def video_capture(url, width, height, duration=10, fps=60, padding=5, fn="video.
                 .output(
                     fn,
                     {"codec:v": "libx264"},
-                    vf=f"crop={width}:{height}:0:0",
+                    vf=f"crop={width}:{height}:0:0,setpts=PTS/{speed}",
                     preset="veryslow",
                     crf=24,
                     ss=1,
